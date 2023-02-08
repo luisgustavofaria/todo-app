@@ -7,25 +7,26 @@ const Content = styled.div`
 
 export default function Todo() {
 
-  const [task, setTask] = useState("")
-  const [itemList, setItemList] = useState([])
+  const [task, setTask] = useState("") // <------ estado
+  const [itemList, setItemList] = useState([]) // <----- será um Array
 
   function handleChangeInput(event) {
     const inputTask = event.target.value
 
-    setTask(inputTask)
+    setTask(inputTask) // <----- atualizamos o estado "task" atraves de "setTask"
   }
 
+  // Adiciona um novo elemento na lista
   function handleAddItemToList(event) {
-    event.preventDefault()
+    event.preventDefault() // <----- desabilita o refresh na pagina ao enviar um formulário
 
-    if (!task) { // <----- Se nao tiver vazio, nao faz nada
+    if (!task) { // <----- Evita o usuário adicionar uma tarefa sem nome
       return
     }
 
-    setItemList([...itemList, task])
+    setItemList([...itemList, task]) // <----- Copia todos os items ja existentes e entao adiciona um novo item
 
-    setTask("")
+    setTask("") // <----- Reseta o valor do input
   }
 
     return (
@@ -37,9 +38,9 @@ export default function Todo() {
           </form>
     
           <ul className="todo-list" >
-            {itemList.map((item, index) => {
-              <li key={index}>{item}</li>
-            })}
+            {itemList.map((item, index) => ( // <----- Percorremos o array de todos
+              <li key={index}>{item}</li> // <----- Para cada item do array, criamos um `li`
+            ))}
           </ul>
         </div>
       );
